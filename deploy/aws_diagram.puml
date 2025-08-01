@@ -1,0 +1,27 @@
+@startuml AWSDeployment
+!define AWSPuml https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v20.0/dist
+!includeurl AWSPUML/Common.puml
+!includeurl AWSPUML/Compute/ECS.puml
+!includeurl AWSPUML/Database/RDS.puml
+!includeurl AWSPUML/Storage/ECR.puml
+!includeurl AWSPUML/Network/ELB.puml
+!includeurl AWSPUML/Security/SG.puml
+
+ECR(repository, "ECR Repository\nmovies-rag:latest")
+ECS(cluster, "ECS Cluster\nFargate")
+Container(app, "Fargate Service\nmovies-rag-app\nPort 8000", "8000/tcp")
+RDS(db, "RDS PostgreSQL\n(pgvector)")
+SG(alb_sg, "SG ALB\nAllow HTTP 80")
+SG(ecs_sg, "SG ECS\nAllow 8000 from ALB")
+SG(rds_sg, "SG RDS\nAllow 5432 from ECS")
+ELB(alb, "Application Load Balancer\nHTTP 80")
+
+alb_sg ..> alb
+alb --> ecs_sg
+ecs_sg --> app
+app --> db
+rds_sg --> db
+cluster --> app
+repository --> app
+
+@enduml
