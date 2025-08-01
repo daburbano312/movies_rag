@@ -63,7 +63,7 @@ movies-rag/
    pip install -r requirements.txt
    ```
 
-3. **Crea el archivo **`` a partir de `.env.example`:
+3. **Crea el archivo**`` a partir de `.env.example`:
 
    ```bash
    cp .env.example .env
@@ -113,7 +113,7 @@ movies-rag/
    npm install
    ```
 
-2. **Configura **``
+2. **Configura**``
 
    ```dotenv
    MODELS=`[
@@ -131,7 +131,7 @@ movies-rag/
    OPENAI_API_KEY=<tu_api_key>
    ```
 
-3. **Proxy en **`` (ya incluido en este repo):
+3. **Proxy en**`` (ya incluido en este repo):
 
    ```ts
    server: {
@@ -190,9 +190,5 @@ Consulta `deploy/aws_diagram.md` para un diagrama detallado de despliegue.
 
 Para mejoras, haz **fork** y **pull request**. Sigue las buenas prácticas: tests, linting y documentación actualizada.
 
----
 
-## 📄 Licencia
-
-MIT License © 2025
 
