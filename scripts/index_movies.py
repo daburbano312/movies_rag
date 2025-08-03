@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # scripts/index_movies.py
 
 import os
@@ -9,7 +8,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from pgvector.psycopg2 import register_vector
 
-# ─── 0️⃣ Carga variables de entorno ────────────────────────────────────────
+# ─── Carga variables de entorno ────────────────────────────────────────
 load_dotenv()
 OPENAI_API_KEY  = os.getenv("OPENAI_API_KEY")
 DATABASE_URL    = os.getenv("DATABASE_URL")
@@ -69,12 +68,12 @@ def pick_fields(fieldnames: list[str]) -> tuple[str,str]:
     return title_key, desc_key
 
 def index_movies(csv_path: str):
-    # 1️⃣ Verifica existencia del CSV
+    # Verifica existencia del CSV
     print(f"📂 Path CSV: {csv_path}")
     if not os.path.isfile(csv_path):
         raise FileNotFoundError(f"No existe el archivo CSV en '{csv_path}'")
 
-    # 2️⃣ Lee todo y detecta campos
+    # Lee todo y detecta campos
     with open(csv_path, newline='', encoding='utf-8') as f:
         reader     = csv.DictReader(f)
         fieldnames = reader.fieldnames or []
@@ -89,7 +88,7 @@ def index_movies(csv_path: str):
         print("⚠️ El CSV no contiene filas.")
         return
 
-    # 3️⃣ Prepara la BD
+    # Prepara la BD
     wait_for_db(DATABASE_URL)
     conn = psycopg2.connect(DATABASE_URL)
     init_db(conn)

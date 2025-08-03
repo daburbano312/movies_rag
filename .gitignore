@@ -27,6 +27,7 @@ Thumbs.db
 /movies_rag/data/
 /Movies-RAG/data/
 /data/db/
+/frontend
 
 # Logs and coverage
 *.log

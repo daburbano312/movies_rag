@@ -1,0 +1,28 @@
+@startuml CleanArchitecture
+package "Core" {
+  component "Entities\n(Movie, User, etc.)" as Entities
+  component "Use Cases\n(retrieve_similar, generate_answer)" as UseCases
+}
+package "Infrastructure" {
+  component "Embeddings\n(embed_text)" as Embeddings
+  component "Database\n(PostgreSQL + pgvector)" as Database
+  component "OpenAI Client\n(call_chat_completion)" as OpenAIClient
+}
+package "Interfaces" {
+  component "API Layer\n(FastAPI controllers)" as API
+  component "Auth, Validation\n(Pydantic schemas)" as Validation
+}
+package "Presentation" {
+  component "HTTP\nEndpoints (/ask, /health)" as HTTP
+  component "Docs\n(OpenAPI / Swagger)" as Docs
+}
+
+Entities --> UseCases
+UseCases --> Embeddings
+UseCases --> Database
+UseCases --> OpenAIClient
+API --> UseCases
+API --> Validation
+HTTP --> API
+Docs --> API
+@enduml

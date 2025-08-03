@@ -28,7 +28,6 @@ class ChatRequest(BaseModel):
     messages: List[Message]
     temperature: Optional[float] = 0.0
     max_tokens: Optional[int] = 512
-    # Si el frontend envía `stream`, lo aceptamos y lo ignoramos (no hacemos streaming)
     stream: Optional[bool] = False
 
 
